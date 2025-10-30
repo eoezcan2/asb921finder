@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "ASB921 Dienst-Finder",
-  "version": "1.7",
-  "description": "Filtert den Dienstplan auf old.samariter.at",
+  "name": "ASB921Finder",
+  "version": "1.0",
+  "description": "Fügt eine Filterfunktion im Dienstplan auf old.samariter.at hinzu",
   "permissions": [
     "storage"
   ],
