@@ -1,13 +1,13 @@
 /*
- * ASB921FINDER V1.7
+ * ASB921FINDER V1.8
  * Fügt eine Filterleiste direkt in die Seite old.samariter.at ein.
- * V1.7: MutationObserver wartet jetzt auf die ERSTE DIENSTZEILE
- * (tr[class^="dienstid"]) statt nur auf den Container (#dpl).
- * Dies ist der robusteste Weg, um Timing-Probleme zu beheben.
+ * V1.7: MutationObserver wartet jetzt auf die ERSTE DIENSTZEILE...
+ * V1.8: z-index von 9999 auf 999 gesenkt, um
+ * Popups der Seite nicht mehr zu verdecken.
  */
 
 // ##################################################################
-// NEUER STARTPUNKT (V1.7)
+// NEUER STARTPUNKT (V1.7 Logik)
 // ##################################################################
 
 // 1. Prüfen, ob die erste Dienstzeile (die Daten) schon da ist.
@@ -60,7 +60,7 @@ function runExtensionSetup() {
 
 
 // ##################################################################
-// UNVERÄNDERTE FUNKTIONEN (AB HIER)
+// FUNKTIONEN
 // ##################################################################
 
 /**
@@ -70,8 +70,11 @@ function injectFilterUI(targetElement) {
   const filterBox = document.createElement('div');
   filterBox.id = "asb921-filter-box"; // Wichtig, um Duplikate zu verhindern
 
-  filterBox.style = "padding: 12px; background: #f0f0f0; border-bottom: 3px solid #739418; margin-bottom: 10px; position: sticky; top: 0; z-index: 9999; font-family: Arial, sans-serif;";
+  // *** HIER IST DIE EINZIGE ÄNDERUNG (V1.8) ***
+  // z-index: 9999; wurde zu z-index: 999;
+  filterBox.style = "padding: 12px; background: #f0f0f0; border-bottom: 3px solid #739418; margin-bottom: 10px; position: sticky; top: 0; z-index: 999; font-family: Arial, sans-serif;";
 
+  // Deine angepassten Texte bleiben erhalten
   filterBox.innerHTML = `
     <div>
       <strong style="margin-right: 10px;">ASB921 Filter:</strong>
