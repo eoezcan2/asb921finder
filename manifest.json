@@ -7,7 +7,7 @@
     "storage"
   ],
   "host_permissions": [
-    "http://old.samariter.at/*"
+    "https://old.samariter.at/*"
   ],
 
   "action": {
@@ -19,7 +19,7 @@
 
   "content_scripts": [
     {
-      "matches": ["http://old.samariter.at/*"],
+      "matches": ["https://old.samariter.at/*"],
       "js": ["content.js"]
     }
   ],
