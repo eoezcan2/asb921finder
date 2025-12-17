@@ -56,6 +56,7 @@ function runExtensionSetup() {
 
   injectFilterUI(targetElement); // UI einfügen
   preprocessAndFillDates();      // Datumszellen VOR dem Filtern füllen
+  initializeColoring();
 }
 
 
@@ -200,11 +201,39 @@ function applyFilter() {
     const col4Match = checkMatch(nameCol4, filterCol4El);
 
     if (datumMatch && nameMatch && col1Match && col2Match && col3Match && col4Match) {
-      row.style.display = "";
+      row.style.display = ""; // SHOW
+
+      row.querySelectorAll('td.dpl_pos').forEach(cell => {
+        colorNames(cell);
+      });
+
     } else {
-      row.style.display = "none";
+      row.style.display = "none"; // HIDE
     }
   });
+}
+
+function initializeColoring() {
+    const rows = document.querySelectorAll('tr[class^="dienstid"]');
+    rows.forEach(row => {
+        row.querySelectorAll('td.dpl_pos').forEach(cell => {
+            colorNames(cell);
+        });
+    });
+}
+
+function colorNames(cell) {
+  const name = cell.innerText.trim();
+  if (name.startsWith("HA ")) {
+    cell.style.color = "blue";
+  } else {
+    // if name is only in uppercase letters
+    if (name === 'GESPERRT') {
+      cell.style.color = "red";
+    } else if (name === name.toUpperCase() && name !== "") {
+        cell.style.color = "green";
+    }
+  }
 }
 
 /**
