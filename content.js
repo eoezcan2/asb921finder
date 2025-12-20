@@ -179,7 +179,7 @@ function applyFilter() {
   const rows = document.querySelectorAll('tr[class^="dienstid"]');
 
   rows.forEach(row => {
-
+    const targetTag = row.cells[0].innerText.trim().toLowerCase();
     const targetDatum = row.cells[1].innerText.trim().toLowerCase();
 
     const nameCells = row.querySelectorAll('td.dpl_pos');
@@ -193,6 +193,8 @@ function applyFilter() {
     const nameCol3 = (nameCells[2] ? nameCells[2].innerText.trim().toLowerCase() : "");
     const nameCol4 = (nameCells[3] ? nameCells[3].innerText.trim().toLowerCase() : "");
 
+
+    const tagMatch = checkMatch(targetTag, filterDatumEl);
     const datumMatch = checkMatch(targetDatum, filterDatumEl);
     const nameMatch = checkMatch(allNamesInRow, filterNameEl);
     const col1Match = checkMatch(nameCol1, filterCol1El);
@@ -200,7 +202,7 @@ function applyFilter() {
     const col3Match = checkMatch(nameCol3, filterCol3El);
     const col4Match = checkMatch(nameCol4, filterCol4El);
 
-    if (datumMatch && nameMatch && col1Match && col2Match && col3Match && col4Match) {
+    if ((datumMatch || tagMatch) && nameMatch && col1Match && col2Match && col3Match && col4Match) {
       row.style.display = ""; // SHOW
 
       row.querySelectorAll('td.dpl_pos').forEach(cell => {
