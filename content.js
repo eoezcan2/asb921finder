@@ -226,14 +226,20 @@ function initializeColoring() {
 
 function colorNames(cell) {
   const name = cell.innerText.trim();
-  if (name.startsWith("HA ")) {
+
+  // HA + (FSJ ODER optional Initial) + Nachname
+  const haRegex = /^HA\s(?:(?:FSJ|[A-Z][a-z]?\.)\s)?[A-ZÄÖÜ]+$/;
+
+  // optional Initial + Nachname
+  const nameRegex = /^(?:[A-Z][a-z]?\.\s)?[A-ZÄÖÜ]+$/;
+
+  if (haRegex.test(name)) {
     cell.style.color = "blue";
   } else {
-    // if name is only in uppercase letters
     if (name === 'GESPERRT') {
       cell.style.color = "red";
-    } else if (name === name.toUpperCase() && name !== "") {
-        cell.style.color = "green";
+    } else if (nameRegex.test(name)) {
+      cell.style.color = "green";
     }
   }
 }
